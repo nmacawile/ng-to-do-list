@@ -1,3 +1,23 @@
-App component <a routerLink="login">Log in</a>
+<mat-toolbar color="primary"
+  class="mat-elevation-z6"
+  fxLayout="row"
+  fxLayoutAlign="space-between center">
+  <span>To-do List</span>
+
+  <span>
+    <ng-container *ngIf="authService.user | async as user">
+      <span class="mat-body-1">
+        {{user.email}}
+      </span>
+      <a mat-button (click)="authService.logOut()">LOG-OUT</a>
+    </ng-container>
+
+    <a *ngIf="!(authService.user | async)" mat-stroked-button routerLink="login" color="accent">LOG-IN</a>
+  </span>
+</mat-toolbar>
 <br>
-<router-outlet></router-outlet>
+
+
+
+<router-outlet>
+</router-outlet>
