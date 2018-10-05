@@ -1,0 +1,3 @@
+<button (click)="authService.googleLogIn()">Google</button>
+<button (click)="authService.logOut()">SignOut</button>
+<a href="#">{{(authService.user | async)?.email}}</a>
