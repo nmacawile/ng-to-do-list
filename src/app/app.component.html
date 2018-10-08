@@ -14,9 +14,18 @@
       <span class="mat-body-1">
         {{user.email}}
       </span>
-      <a mat-button (click)="authService.logOut()">
-        LOG-OUT
-      </a>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/projects">
+          <span>Projects</span>
+        </button>
+        <button mat-menu-item (click)="authService.logOut()">
+          <span>Log-out</span>
+        </button>
+      </mat-menu>
+
     </ng-container>
 
     <a *ngIf="!(authService.user | async)" mat-stroked-button routerLink="login" color="accent">
