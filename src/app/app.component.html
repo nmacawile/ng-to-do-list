@@ -1,23 +1,34 @@
-<mat-toolbar color="primary"
+<mat-toolbar   
+  color="primary"
   class="mat-elevation-z6"
   fxLayout="row"
-  fxLayoutAlign="space-between center">
-  <span>To-do List</span>
+  fxLayoutAlign="space-between center"
+  style="position:fixed; z-index: 6;">
+  <span fxLayout="row">
+    <img src="../assets/to-do-list.svg" style="height: 36px; width: auto; padding-right: 8px;">
+    <span fxHide.xs>To-do List</span>
+  </span>
 
   <span>
     <ng-container *ngIf="authService.user | async as user">
       <span class="mat-body-1">
         {{user.email}}
       </span>
-      <a mat-button (click)="authService.logOut()">LOG-OUT</a>
+      <a mat-button (click)="authService.logOut()">
+        LOG-OUT
+      </a>
     </ng-container>
 
-    <a *ngIf="!(authService.user | async)" mat-stroked-button routerLink="login" color="accent">LOG-IN</a>
+    <a *ngIf="!(authService.user | async)" mat-stroked-button routerLink="login" color="accent">
+      LOG-IN
+    </a>
   </span>
 </mat-toolbar>
-<br>
+<div
+  class="container"
+  style="height: 100%; box-sizing: border-box;"
+  [ngStyle.xs]="{'padding-top': '56px'}"
+  [ngStyle.gt-xs]="{'padding-top': '64px'}">  
 
-
-
-<router-outlet>
-</router-outlet>
+  <router-outlet></router-outlet>
+</div>

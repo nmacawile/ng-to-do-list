@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { FlexModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -20,7 +20,7 @@ import { FlexModule } from '@angular/flex-layout';
     CoreModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

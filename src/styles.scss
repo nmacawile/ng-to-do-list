@@ -1,5 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #303030; }
+
+@media (min-width: 1025px) {
+/* Custom scrollbar (works only on selected browsers)*/
+  ::-webkit-scrollbar {
+      width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+      background: #888; 
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+      background: #555; 
+  }
+}
+
+.task-list mat-expansion-panel {
+  margin-bottom: 16px;
+  min-width: 312px;
+
+  .task-header .mat-content {
+    width: 100%;
+    overflow: unset;
+
+    mat-panel-title {
+      flex-grow: 0;
+
+      .task-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    mat-panel-description {
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+  }
+
+  .task-button-group {
+    overflow: auto;
+    margin:auto;
+  }
+}
+
