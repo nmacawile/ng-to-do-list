@@ -1,3 +1,9 @@
+<button mat-raised-button
+        color="primary"
+        style="margin-bottom: 32px;"
+        [ngStyle.xs]="{ 'width': '100%' }">
+  NEW PROJECT <mat-icon inline="true">add</mat-icon>
+</button>
 <div fxLayout="row wrap" fxLayoutGap="24px grid" style="max-width: 1080px; box-sizing: border-box;">
   <div *ngFor="let project of projects$ | async"
     fxFlex.xs="100%"
@@ -6,7 +12,9 @@
     fxFlex="33.33333%">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{project.name}}</mat-card-title>
+        <mat-card-title>
+          <h2 class="mat-title">{{project.name}}</h2>
+        </mat-card-title>
       </mat-card-header>
       <mat-card-content style="height: 124px;">
         <mat-list role="list" dense>
@@ -18,7 +26,9 @@
         </mat-list>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-raised-button color="primary" fxFlex="100%">OPEN</a>
+        <a mat-flat-button color="accent" fxFlex="100%">
+          <span>OPEN</span> <mat-icon inline="true">arrow_forward_ios</mat-icon>
+        </a>
       </mat-card-actions>
     </mat-card>
   </div>
