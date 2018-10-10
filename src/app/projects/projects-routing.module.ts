@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectsComponent } from './projects.component';
 import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectListComponent,
+    component: ProjectsComponent,
     children: [
       {
         path: ':id',

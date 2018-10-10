@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
-import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectsComponent } from './projects.component';
 import { ProjectComponent } from './project/project.component';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,6 +13,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     FlexLayoutModule,
   ],
-  declarations: [ProjectListComponent, ProjectComponent]
+  declarations: [ProjectsComponent, ProjectComponent]
 })
 export class ProjectsModule { }
