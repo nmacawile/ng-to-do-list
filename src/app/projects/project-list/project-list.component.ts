@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { ProjectsService } from '../projects.service';
+import { Observable } from 'rxjs';
+import { Project } from '../../project';
 
 const SIDE_NAV_DRAWER = {
   mode: 'over',
@@ -21,7 +24,12 @@ const SIDE_NAV_FIXED = {
 export class ProjectListComponent implements OnInit {
   sideNav = SIDE_NAV_DRAWER;
 
-  constructor(private media: ObservableMedia) {}
+  projects$: Observable<Project[]>;
+
+  constructor(
+    private media: ObservableMedia,
+    private projectsService: ProjectsService,
+  ) {}
 
   ngOnInit() {
     this.media.subscribe((mediaChange: MediaChange) => {
@@ -31,5 +39,7 @@ export class ProjectListComponent implements OnInit {
         this.sideNav = SIDE_NAV_FIXED;
       }
     });
+
+    this.projects$ = this.projectsService.getProjects();
   }
 }

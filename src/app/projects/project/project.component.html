@@ -1,62 +1,67 @@
-<div fxLayout style="width:100%" fxLayoutAlign="flex-start flex-start">
-  <h2 class="mat-headline" fxFlex>Project 1</h2>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu" yPosition="below">
-    <button mat-menu-item>
-      <mat-icon>edit</mat-icon>
-      <span>Rename</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>delete</mat-icon>
-      <span>Delete</span>
-    </button>
-  </mat-menu>
+<div *ngIf="loading">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
+<ng-container *ngIf="!loading">  
+  <div fxLayout style="width:100%" fxLayoutAlign="flex-start flex-start">
+    <h2 class="mat-headline" fxFlex>{{project.name}}</h2>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" yPosition="below">
+      <button mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Rename</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </div>
 
-<mat-accordion multi="true" class="task-list">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header class="task-header">
-      <mat-panel-title>
-        <mat-checkbox (click)="$event.stopPropagation();" color="accent">
-          <div class="task-title"           
-               [ngStyle]="{ 'max-width': '280px' }"
-               [ngStyle.xs]="{ 'max-width': '216px' }">
-            Task Title
+  <mat-accordion multi="true" class="task-list">
+    <mat-expansion-panel *ngFor="let task of project.tasks">
+      <mat-expansion-panel-header class="task-header">
+        <mat-panel-title>
+          <mat-checkbox (click)="$event.stopPropagation();" color="accent">
+            <div class="task-title"           
+                 [ngStyle]="{ 'max-width': '280px' }"
+                 [ngStyle.xs]="{ 'max-width': '216px' }">
+              {{task.name}}
+            </div>
+          </mat-checkbox> 
+        </mat-panel-title>
+        <mat-panel-description fxHide.xs fxFlex>
+          {{task.description}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form fxLayout="row wrap" fxLayoutGap="16px grid">
+        <mat-form-field fxFlex="100%">
+          <input matInput placeholder="Title" value="Task Title">
+        </mat-form-field>
+        <mat-form-field fxFlex="100%">
+          <mat-label>Description</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMaxRows="5">Task Description</textarea>
+        </mat-form-field>
+        <mat-form-field fxFlex="50%">
+          <input type="number" matInput placeholder="Priority" value="{{task.priority}}">
+        </mat-form-field>
+        <mat-form-field fxFlex="50%">
+          <input matInput [matDatepicker]="picker" placeholder="Due">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div fxFlex="100%" fxLayout>
+          <div class="task-button-group" fxLayout fxLayoutGap="16px">
+            <button type="button" mat-flat-button color="warn">DELETE</button>
+            <button type="reset" mat-flat-button color="accent">RESET</button>
+            <button type="submit" mat-flat-button color="accent" disabled>SAVE</button>
           </div>
-        </mat-checkbox> 
-      </mat-panel-title>
-      <mat-panel-description fxHide.xs fxFlex>
-        Task Description
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <form fxLayout="row wrap" fxLayoutGap="16px grid">
-      <mat-form-field fxFlex="100%">
-        <input matInput placeholder="Title" value="Task Title">
-      </mat-form-field>
-      <mat-form-field fxFlex="100%">
-        <mat-label>Description</mat-label>
-        <textarea matInput
-                  cdkTextareaAutosize
-                  #autosize="cdkTextareaAutosize"
-                  cdkAutosizeMaxRows="5">Task Description</textarea>
-      </mat-form-field>
-      <mat-form-field fxFlex="50%">
-        <input type="number" matInput placeholder="Priority" value="10">
-      </mat-form-field>
-      <mat-form-field fxFlex="50%">
-        <input matInput [matDatepicker]="picker" placeholder="Due">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <div fxFlex="100%" fxLayout>
-        <div class="task-button-group" fxLayout fxLayoutGap="16px">
-          <button type="button" mat-flat-button color="warn">DELETE</button>
-          <button type="reset" mat-flat-button color="accent">RESET</button>
-          <button type="submit" mat-flat-button color="accent" disabled>SAVE</button>
         </div>
-      </div>
-    </form>
-  </mat-expansion-panel>
-</mat-accordion>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>
