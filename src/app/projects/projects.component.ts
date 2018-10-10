@@ -22,7 +22,7 @@ const SIDE_NAV_FIXED = {
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-  sideNav = SIDE_NAV_DRAWER;
+  sideNav = { ...SIDE_NAV_DRAWER };
 
   projects$: Observable<Project[]>;
 
@@ -36,9 +36,9 @@ export class ProjectsComponent implements OnInit {
 
     this.media.subscribe((mediaChange: MediaChange) => {
       if (mediaChange.mqAlias === 'xs' || mediaChange.mqAlias === 'sm') {
-        this.sideNav = SIDE_NAV_DRAWER;
+        this.sideNav = { ...SIDE_NAV_DRAWER };
       } else {
-        this.sideNav = SIDE_NAV_FIXED;
+        this.sideNav ={ ...SIDE_NAV_FIXED };
       }
     });
 
