@@ -13,6 +13,7 @@ import {
   MatNativeDateModule,
   MatMenuModule,
   MatProgressSpinnerModule,
+  MatCardModule,
 } from '@angular/material';
 
 @NgModule({
@@ -30,6 +31,7 @@ import {
     MatNativeDateModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatCardModule,
   ],
   declarations: [],
 })

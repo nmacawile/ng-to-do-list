@@ -1,6 +1,6 @@
 <mat-toolbar>
   <button mat-icon-button fxHide.gt-sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-  <h2 class="mat-title">Projects</h2>
+  <a mat-button routerLink="/projects" ><h2 class="mat-title">PROJECTS</h2></a>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav 
@@ -16,8 +16,8 @@
 
   <mat-sidenav-content
     style="box-sizing: border-box;"
-    [ngStyle.xs]="{'min-height': 'calc(100vh - 112px)', 'padding': '16px 24px' }"
-    [ngStyle.gt-xs]="{'min-height': 'calc(100vh - 128px)', 'padding': '16px 40px' }">    
+    [ngStyle.xs]="{'min-height': 'calc(100vh - 112px)', 'padding': '24px 24px' }"
+    [ngStyle.gt-xs]="{'min-height': 'calc(100vh - 128px)', 'padding': '24px 40px' }">    
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

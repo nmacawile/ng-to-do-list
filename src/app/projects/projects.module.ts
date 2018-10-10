@@ -6,6 +6,7 @@ import { ProjectsComponent } from './projects.component';
 import { ProjectComponent } from './project/project.component';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { IndexComponent } from './index/index.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +14,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     FlexLayoutModule,
   ],
-  declarations: [ProjectsComponent, ProjectComponent]
+  declarations: [ProjectsComponent, ProjectComponent, IndexComponent]
 })
 export class ProjectsModule { }
