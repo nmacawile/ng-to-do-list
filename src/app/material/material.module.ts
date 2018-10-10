@@ -14,6 +14,7 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
   MatCardModule,
+  MatDialogModule,
 } from '@angular/material';
 
 @NgModule({
@@ -32,6 +33,7 @@ import {
     MatMenuModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatDialogModule,
   ],
   declarations: [],
 })

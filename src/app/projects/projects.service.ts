@@ -56,4 +56,6 @@ export class ProjectsService {
       }),
     );
   }
+
+  createProject(name: string) {}
 }

@@ -7,13 +7,24 @@ import { ProjectComponent } from './project/project.component';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndexComponent } from './index/index.component';
+import { NewProjectFormComponent } from './new-project-form/new-project-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     ProjectsRoutingModule,
     MaterialModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
-  declarations: [ProjectsComponent, ProjectComponent, IndexComponent]
+  declarations: [
+    ProjectsComponent,
+    ProjectComponent,
+    IndexComponent,
+    NewProjectFormComponent,
+  ],
+  entryComponents: [NewProjectFormComponent],
 })
-export class ProjectsModule { }
+export class ProjectsModule {}
