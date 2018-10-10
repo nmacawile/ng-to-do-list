@@ -24,9 +24,7 @@
       <mat-expansion-panel-header class="task-header">
         <mat-panel-title>
           <mat-checkbox (click)="$event.stopPropagation();" color="accent">
-            <div class="task-title"           
-                 [ngStyle]="{ 'max-width': '280px' }"
-                 [ngStyle.xs]="{ 'max-width': '216px' }">
+            <div class="task-title">
               {{task.name}}
             </div>
           </mat-checkbox> 

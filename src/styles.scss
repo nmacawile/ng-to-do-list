@@ -37,6 +37,7 @@ body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #303030; 
       .task-title {
         overflow: hidden;
         text-overflow: ellipsis;
+        width: 216px;
       }
     }
 
