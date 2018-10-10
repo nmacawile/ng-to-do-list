@@ -32,6 +32,8 @@ export class ProjectListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (!(this.media.isActive('xs') || this.media.isActive('sm'))) this.sideNav.opened = true;
+
     this.media.subscribe((mediaChange: MediaChange) => {
       if (mediaChange.mqAlias === 'xs' || mediaChange.mqAlias === 'sm') {
         this.sideNav = SIDE_NAV_DRAWER;
