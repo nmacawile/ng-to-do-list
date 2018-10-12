@@ -1,16 +1,19 @@
-<button mat-raised-button
-        (click)="openNewProjectForm()"
-        color="primary"
-        style="margin-bottom: 32px;"
-        [ngStyle.xs]="{ 'width': '100%' }">
-  NEW PROJECT <mat-icon inline="true">add</mat-icon>
-</button>
-<div fxLayout="row wrap" fxLayoutGap="24px grid" style="max-width: 1080px; box-sizing: border-box;">
-  <div *ngFor="let project of projects$ | async"
-    fxFlex.xs="100%"
-    fxFlex.sm="50%"
-    fxFlex.md="50%"
-    fxFlex="33.33333%">
-    <app-project-card [project]=project></app-project-card>
+<app-loading-spinner *ngIf="!(projects$ | async)"></app-loading-spinner>
+<ng-container *ngIf="projects$ | async">
+  <button mat-raised-button
+          (click)="openNewProjectForm()"
+          color="primary"
+          style="margin-bottom: 32px;"
+          [ngStyle.xs]="{ 'width': '100%' }">
+    NEW PROJECT <mat-icon inline="true">add</mat-icon>
+  </button>
+  <div fxLayout="row wrap" fxLayoutGap="24px grid" style="max-width: 1080px; box-sizing: border-box;">
+    <div *ngFor="let project of projects$ | async"
+      fxFlex.xs="100%"
+      fxFlex.sm="50%"
+      fxFlex.md="50%"
+      fxFlex="33.33333%">
+      <app-project-card [project]=project></app-project-card>
+    </div>
   </div>
-</div>
+</ng-container>

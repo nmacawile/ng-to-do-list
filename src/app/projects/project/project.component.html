@@ -1,6 +1,4 @@
-<div *ngIf="loading">
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
 <ng-container *ngIf="!loading">  
   <div fxLayout
        style="width:100%"

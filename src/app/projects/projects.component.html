@@ -9,7 +9,9 @@
     [disableClose]="sideNav.disableClose"
     [opened]="sideNav.opened"
     style="width: 280px;">
-    <mat-nav-list>
+    <app-loading-spinner *ngIf="!(projects$ | async)">
+    </app-loading-spinner>
+    <mat-nav-list *ngIf="projects$ | async">
       <a *ngFor="let project of projects$ | async" mat-list-item routerLink="./{{project.id}}" routerLinkActive="active-link" style="padding-left: 8px;">{{project.name}}</a>
     </mat-nav-list>
   </mat-sidenav>

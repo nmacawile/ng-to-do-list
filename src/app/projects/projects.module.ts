@@ -10,6 +10,7 @@ import { IndexComponent } from './index/index.component';
 import { NewProjectFormComponent } from './new-project-form/new-project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProjectCardComponent } from './index/project-card/project-card.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { ProjectCardComponent } from './index/project-card/project-card.componen
     IndexComponent,
     NewProjectFormComponent,
     ProjectCardComponent,
+    LoadingSpinnerComponent,
   ],
   entryComponents: [NewProjectFormComponent],
 })
