@@ -11,29 +11,6 @@
     fxFlex.sm="50%"
     fxFlex.md="50%"
     fxFlex="33.33333%">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          <h2 class="mat-title">{{project.name}}</h2>
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content style="height: 124px;">
-        <p class="mat-body-1" *ngIf="!project.tasks.length">
-          This project has no tasks.
-        </p>
-        <mat-list role="list" dense *ngIf="project.tasks.length">
-          <ng-container *ngFor="let task of project.tasks; let i=index">
-            <mat-list-item *ngIf="i<3" role="listitem">
-              <mat-icon color="accent">check_box</mat-icon><span style="margin-left: 8px">{{task.name}}</span>
-            </mat-list-item>
-          </ng-container>
-        </mat-list>
-      </mat-card-content>
-      <mat-card-actions>
-        <a mat-flat-button color="accent" fxFlex="100%">
-          <span>OPEN</span> <mat-icon inline="true">arrow_forward_ios</mat-icon>
-        </a>
-      </mat-card-actions>
-    </mat-card>
+    <app-project-card [project]=project></app-project-card>
   </div>
 </div>

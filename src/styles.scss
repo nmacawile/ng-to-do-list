@@ -23,6 +23,10 @@ body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #303030; 
   }
 }
 
+.project-card-header .mat-card-header-text {
+  width: 100%;
+}
+
 .task-list mat-expansion-panel {
   margin-bottom: 16px !important;
   min-width: 312px;

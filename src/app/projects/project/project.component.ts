@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProjectsService } from '../projects.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { Project } from '../../project';
 import { Task } from '../../task';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-project',
@@ -15,28 +16,57 @@ export class ProjectComponent implements OnInit, OnDestroy {
   project: Project;
   projectSub: Subscription;
   loading = false;
+  editMode = false;
+
+  editForm: FormGroup;
 
   constructor(
     private projectsService: ProjectsService,
     private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
   ) {}
 
   ngOnInit() {
     this.projectSub = this.route.paramMap
       .pipe(
+        tap(() => {
+          this.loading = true;
+          this.editMode = false;
+        }),
         switchMap(params => {
           this.loading = true;
           const id = params.get('id');
           return this.projectsService.getProject(id);
         }),
+        tap(() => (this.loading = false)),
       )
       .subscribe(project => {
-        this.loading = false;
         this.project = project;
+        this.editForm = this.fb.group({ name: project.name });
       });
   }
 
   ngOnDestroy() {
     this.projectSub.unsubscribe();
+  }
+
+  toggleEdit() {
+    this.editMode = !this.editMode;
+  }
+
+  save() {
+    if (
+      this.editForm.get('name').value.trim() !== '' &&
+      this.editForm.get('name').value !== this.project.name
+    )
+      this.projectsService.updateProject(this.project.id, this.editForm.value)
+
+    this.toggleEdit();
+  }
+
+  delete() {
+    this.projectsService.deleteProject(this.project.id);
+    this.router.navigate(['/projects'])
   }
 }

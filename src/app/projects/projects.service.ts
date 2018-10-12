@@ -65,7 +65,37 @@ export class ProjectsService {
             .collection<User>('users')
             .doc(user.uid)
             .collection<Project>('projects')
-            .add({ name: name, tasks: [] })
+            .add({ name: name, tasks: [] }),
+        ),
+      )
+      .toPromise();
+  }
+
+  updateProject(id: string, data: any) {
+    return this.authService.user
+      .pipe(
+        map((user: User) =>
+          this.afs
+            .collection<User>('users')
+            .doc(user.uid)
+            .collection<Project>('projects')
+            .doc(id)
+            .update(data),
+        ),
+      )
+      .toPromise();
+  }
+
+  deleteProject(id: string) {
+    return this.authService.user
+      .pipe(
+        map((user: User) =>
+          this.afs
+            .collection<User>('users')
+            .doc(user.uid)
+            .collection<Project>('projects')
+            .doc(id)
+            .delete(),
         ),
       )
       .toPromise();

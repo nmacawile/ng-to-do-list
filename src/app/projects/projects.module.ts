@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { IndexComponent } from './index/index.component';
 import { NewProjectFormComponent } from './new-project-form/new-project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ProjectCardComponent } from './index/project-card/project-card.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ProjectComponent,
     IndexComponent,
     NewProjectFormComponent,
+    ProjectCardComponent,
   ],
   entryComponents: [NewProjectFormComponent],
 })

@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-header class="project-card-header">
+    <button *ngIf="!editMode" mat-icon-button [matMenuTriggerFor]="projectMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>    
+    <mat-menu #projectMenu="matMenu" yPosition="below">
+      <button mat-menu-item (click)="toggleEdit()">
+        <mat-icon>edit</mat-icon>
+        <span>Rename</span>
+      </button>
+      <button mat-menu-item (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+    <mat-card-title>
+    <h2 *ngIf="!editMode"
+        class="mat-title">
+      {{project.name}}
+    </h2>
+
+    <form *ngIf="editMode"
+          fxLayout="row nowrap"
+          fxLayoutAlign="center center"
+          [formGroup]="editForm"
+          (ngSubmit)="save()">
+      <mat-form-field fxFlex="100%">
+        <input
+          [ngStyle]="{ 'fontSize': '18px', 'fontWeight': '500' }"
+          matInput
+          placeholder="Name"
+          formControlName="name">
+      </mat-form-field>
+      <button mat-icon-button><mat-icon>save</mat-icon></button>
+    </form>
+
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="height: 124px;">
+    <p class="mat-body-1" *ngIf="!project.tasks.length">
+      This project has no tasks.
+    </p>
+    <mat-list role="list" dense *ngIf="project.tasks.length">
+      <ng-container *ngFor="let task of project.tasks; let i=index">
+        <mat-list-item *ngIf="i<3" role="listitem">
+          <mat-icon color="accent">check_box</mat-icon><span style="margin-left: 8px">{{task.name}}</span>
+        </mat-list-item>
+      </ng-container>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-flat-button color="accent" fxFlex="100%">
+      <span>OPEN</span> <mat-icon inline="true">arrow_forward_ios</mat-icon>
+    </a>
+  </mat-card-actions>
+</mat-card>
