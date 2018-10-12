@@ -18,8 +18,11 @@
       </button>
     </mat-menu>
   </div>
-
-  <mat-accordion multi="true" class="task-list">
+  
+  <p class="mat-body-1" *ngIf="!project.tasks.length">
+    This project has no tasks.
+  </p>
+  <mat-accordion *ngIf="project.tasks.length" multi="true" class="task-list">
     <mat-expansion-panel *ngFor="let task of project.tasks">
       <mat-expansion-panel-header class="task-header">
         <mat-panel-title>

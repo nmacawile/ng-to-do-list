@@ -18,7 +18,10 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="height: 124px;">
-        <mat-list role="list" dense>
+        <p class="mat-body-1" *ngIf="!project.tasks.length">
+          This project has no tasks.
+        </p>
+        <mat-list role="list" dense *ngIf="project.tasks.length">
           <ng-container *ngFor="let task of project.tasks; let i=index">
             <mat-list-item *ngIf="i<3" role="listitem">
               <mat-icon color="accent">check_box</mat-icon><span style="margin-left: 8px">{{task.name}}</span>
