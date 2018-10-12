@@ -57,5 +57,17 @@ export class ProjectsService {
     );
   }
 
-  createProject(name: string) {}
+  createProject(name: string) {
+    return this.authService.user
+      .pipe(
+        map((user: User) =>
+          this.afs
+            .collection<User>('users')
+            .doc(user.uid)
+            .collection<Project>('projects')
+            .add({ name: name, tasks: [] })
+        ),
+      )
+      .toPromise();
+  }
 }

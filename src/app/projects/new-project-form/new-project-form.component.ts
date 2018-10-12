@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectsService } from '../projects.service';
 import { Project } from '../../project';
 
@@ -19,12 +19,16 @@ export class NewProjectFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.newProjectForm = this.fb.group({ name: '' });
+    this.newProjectForm = this.fb.group({
+      name: ['', [Validators.required]],
+    });
   }
-  
+
   create() {
-    this.projectsService.createProject('newww');
-    this.close();
+    if (this.newProjectForm.valid) {
+      this.projectsService.createProject(this.newProjectForm.get('name').value);
+      this.close();
+    }
   }
 
   close() {
