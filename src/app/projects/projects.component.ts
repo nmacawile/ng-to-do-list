@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ObservableMedia, MediaChange } from '@angular/flex-layout';
+import { ObservableMedia } from '@angular/flex-layout';
 import { ProjectsService } from './projects.service';
 import { Observable } from 'rxjs';
 import { Project } from '../project';
@@ -32,16 +32,18 @@ export class ProjectsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (!(this.media.isActive('xs') || this.media.isActive('sm'))) this.sideNav.opened = true;
+    this.updateSideNav();
 
-    this.media.subscribe((mediaChange: MediaChange) => {
-      if (mediaChange.mqAlias === 'xs' || mediaChange.mqAlias === 'sm') {
-        this.sideNav = { ...SIDE_NAV_DRAWER };
-      } else {
-        this.sideNav ={ ...SIDE_NAV_FIXED };
-      }
-    });
+    this.media.subscribe(() => this.updateSideNav());
 
     this.projects$ = this.projectsService.getProjects();
+  }
+
+  updateSideNav() {
+    if (!(this.media.isActive('xs') || this.media.isActive('sm'))) {
+      this.sideNav = { ...SIDE_NAV_FIXED };
+    } else {
+      this.sideNav = { ...SIDE_NAV_DRAWER };
+    }
   }
 }
