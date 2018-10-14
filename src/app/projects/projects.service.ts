@@ -4,7 +4,7 @@ import {
   AngularFirestoreDocument,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { Project } from '../project';
 import { User } from '../user';
@@ -23,6 +23,7 @@ export class ProjectsService {
   getProjects(): Observable<Project[]> {
     return this.authService.user.pipe(
       switchMap((user: User) => {
+        if (user === null) return of([]);
         return this.afs
           .collection<User>('users')
           .doc(user.uid)
