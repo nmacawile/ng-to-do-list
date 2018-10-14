@@ -34,7 +34,9 @@ export class AuthService {
   }
 
   googleLogIn() {
-    return this.oAuthLogIn(new auth.GoogleAuthProvider());
+    this.oAuthLogIn(new auth.GoogleAuthProvider()).then(() =>
+      this.router.navigate(['/projects']),
+    );
   }
 
   private oAuthLogIn(provider) {
@@ -45,7 +47,7 @@ export class AuthService {
 
   private createOrUpdateUser(userData) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${userData.uid}`
+      `users/${userData.uid}`,
     );
 
     const user: User = {

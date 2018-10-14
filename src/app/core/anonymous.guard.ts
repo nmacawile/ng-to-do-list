@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AnonymousGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -21,9 +21,9 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.user.pipe(
       take(1),
-      map(user => !!user),
-      tap(loggedIn => {
-        if (!loggedIn) this.router.navigate(['/']);
+      map(user => !user),
+      tap(anonymous => {
+        if (!anonymous) this.router.navigate(['/projects']);
       }),
     );
   }
