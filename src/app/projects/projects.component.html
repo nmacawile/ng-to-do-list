@@ -1,18 +1,18 @@
 <mat-toolbar>
   <button mat-icon-button fxHide.gt-sm (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-  <a mat-button routerLink="/projects">PROJECTS</a>
+  <a mat-button routerLink="/projects" (click)="smallScreen ? snav.close() : 0">PROJECTS</a>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav 
     #snav
-    [mode]="sideNav.mode"
-    [disableClose]="sideNav.disableClose"
-    [opened]="sideNav.opened"
+    [mode]="smallScreen ? 'over' : 'side'"
+    [disableClose]="smallScreen ? false : true"
+    [opened]="smallScreen ? false : true"
     style="width: 280px;">
     <app-loading-spinner *ngIf="!(projects$ | async)">
     </app-loading-spinner>
     <mat-nav-list *ngIf="projects$ | async">
-      <a *ngFor="let project of projects$ | async" mat-list-item routerLink="./{{project.id}}" routerLinkActive="active-link" style="padding-left: 8px;">{{project.name}}</a>
+      <a *ngFor="let project of projects$ | async" mat-list-item routerLink="./{{project.id}}" (click)="smallScreen ? snav.close() : 0" routerLinkActive="active-link" style="padding-left: 8px;">{{project.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
 
