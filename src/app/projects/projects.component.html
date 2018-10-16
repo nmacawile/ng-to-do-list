@@ -11,9 +11,12 @@
     style="width: 280px;">
     <app-loading-spinner *ngIf="!(projects$ | async)">
     </app-loading-spinner>
-    <mat-nav-list *ngIf="projects$ | async">
-      <a *ngFor="let project of projects$ | async" mat-list-item routerLink="./{{project.id}}" (click)="smallScreen ? snav.close() : 0" routerLinkActive="active-link" style="padding-left: 8px;">{{project.name}}</a>
-    </mat-nav-list>
+    <ng-container *ngIf="(projects$ | async) as projects">
+      <p *ngIf="!projects.length" class="mat-body-1" style="margin: 24px">There are no projects yet.</p>
+      <mat-nav-list *ngIf="projects.length">
+        <a *ngFor="let project of projects$ | async" mat-list-item routerLink="./{{project.id}}" (click)="smallScreen ? snav.close() : 0" routerLinkActive="active-link" style="padding-left: 8px;">{{project.name}}</a>
+      </mat-nav-list>
+    </ng-container>
   </mat-sidenav>
 
   <mat-sidenav-content

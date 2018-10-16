@@ -1,5 +1,5 @@
 <app-loading-spinner *ngIf="!(projects$ | async)"></app-loading-spinner>
-<ng-container *ngIf="projects$ | async">
+<ng-container *ngIf="(projects$ | async) as projects">
   <button mat-raised-button
           (click)="openNewProjectForm()"
           color="primary"
@@ -7,7 +7,9 @@
           [ngStyle.xs]="{ 'width': '100%' }">
     NEW PROJECT <mat-icon inline="true">add</mat-icon>
   </button>
-  <div fxLayout="row wrap" fxLayoutGap="24px grid" style="max-width: 1080px; box-sizing: border-box;">
+
+  <p *ngIf="!projects.length">There are no projects yet.</p>
+  <div *ngIf="projects.length" fxLayout="row wrap" fxLayoutGap="24px grid" style="max-width: 1080px; box-sizing: border-box;">
     <div *ngFor="let project of projects$ | async"
       fxFlex.xs="100%"
       fxFlex.sm="50%"
