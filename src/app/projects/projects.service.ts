@@ -53,6 +53,9 @@ export class ProjectsService {
       }),
       map(action => {
         const data = action.payload.data() as Project;
+        data.tasks.forEach(
+          task => (task.due = task.due ? (task.due as any).toDate() : null),
+        );
         const id = action.payload.id;
         return { id, ...data };
       }),
@@ -113,7 +116,10 @@ export class ProjectsService {
             .collection<Project>('projects')
             .doc(projectId)
             .update({
-              tasks: firestore.FieldValue.arrayUnion({ completed: false, ...task}),
+              tasks: firestore.FieldValue.arrayUnion({
+                completed: false,
+                ...task,
+              }),
             }),
         ),
       )

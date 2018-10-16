@@ -12,6 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProjectCardComponent } from './index/project-card/project-card.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
+import { TaskComponent } from './project/task/task.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
     ProjectCardComponent,
     LoadingSpinnerComponent,
     NewTaskFormComponent,
+    TaskComponent,
   ],
   entryComponents: [NewProjectFormComponent, NewTaskFormComponent],
 })

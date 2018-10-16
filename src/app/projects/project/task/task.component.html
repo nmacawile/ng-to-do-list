@@ -1,0 +1,42 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header class="task-header">
+    <mat-panel-title>
+      <mat-checkbox (click)="$event.stopPropagation();" color="accent" [checked]="task.completed">
+        <div class="task-title">
+          {{task.name}}
+        </div>
+      </mat-checkbox> 
+    </mat-panel-title>
+    <mat-panel-description fxHide.xs fxFlex>
+      {{task.description}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <form fxLayout="row wrap" fxLayoutGap="16px grid" [formGroup]="taskForm">
+    <mat-form-field fxFlex="100%">
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field fxFlex="100%">
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMaxRows="5"
+                formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field fxFlex="50%">
+      <input type="number" matInput placeholder="Priority" formControlName="priority">
+    </mat-form-field>
+    <mat-form-field fxFlex="50%">
+      <input matInput [matDatepicker]="picker" placeholder="Due" formControlName="due">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div fxFlex="100%" fxLayout>
+      
+        <button type="button" mat-flat-button color="warn">DELETE</button>
+    </div>
+  </form>
+
+
+</mat-expansion-panel>
