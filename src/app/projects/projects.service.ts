@@ -125,4 +125,21 @@ export class ProjectsService {
       )
       .toPromise();
   }
+
+  deleteTask(projectId: string, task: Task) {
+    return this.authService.user
+      .pipe(
+        map((user: User) =>
+          this.afs
+            .collection<User>('users')
+            .doc(user.uid)
+            .collection<Project>('projects')
+            .doc(projectId)
+            .update({
+              tasks: firestore.FieldValue.arrayRemove(task),
+            }),
+        ),
+      )
+      .toPromise();
+  }
 }

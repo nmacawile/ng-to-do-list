@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../../task';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ProjectsService } from '../../projects.service';
 
 @Component({
   selector: 'app-task',
@@ -10,9 +11,13 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class TaskComponent implements OnInit {
   @Input()
   task: Task;
+
+  @Input()
+  projectId: string;
+
   taskForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private projectsService: ProjectsService) {}
 
   ngOnInit() {
     this.taskForm = this.fb.group({
@@ -21,5 +26,9 @@ export class TaskComponent implements OnInit {
       due: { value: this.task.due, disabled: true },
       priority: { value: this.task.priority, disabled: true },
     });
+  }
+
+  delete() {
+    this.projectsService.deleteTask(this.projectId, this.task);
   }
 }
