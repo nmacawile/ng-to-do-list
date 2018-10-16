@@ -36,14 +36,22 @@
 
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content style="height: 124px;">
+  <mat-card-content style="height: 152px;">
     <p class="mat-body-1" *ngIf="!project.tasks.length">
       This project has no tasks.
+    </p>
+    <p class="mat-body-1" *ngIf="project.tasks.length === 1">
+      This project has 1 task.
+    </p>
+    <p class="mat-body-1" *ngIf="project.tasks.length > 1">
+      This project has {{project.tasks.length}} tasks.
     </p>
     <mat-list role="list" dense *ngIf="project.tasks.length">
       <ng-container *ngFor="let task of project.tasks; let i=index">
         <mat-list-item *ngIf="i<3" role="listitem">
-          <mat-icon color="accent">check_box</mat-icon><span style="margin-left: 8px">{{task.name}}</span>
+          <mat-icon color="accent" *ngIf="task.completed">check_box</mat-icon>
+          <mat-icon color="accent" *ngIf="!task.completed">check_box_outline_blank</mat-icon>
+          <span style="margin-left: 8px">{{task.name}}</span>
         </mat-list-item>
       </ng-container>
     </mat-list>
