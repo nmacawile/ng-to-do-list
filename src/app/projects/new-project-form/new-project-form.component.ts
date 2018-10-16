@@ -20,7 +20,7 @@ export class NewProjectFormComponent implements OnInit {
 
   ngOnInit() {
     this.newProjectForm = this.fb.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
     });
   }
 
@@ -33,5 +33,9 @@ export class NewProjectFormComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  projectFormFieldError(fieldName, errorCode) {
+    return this.newProjectForm.get(fieldName).hasError(errorCode);
   }
 }

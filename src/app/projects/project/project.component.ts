@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { Project } from '../../project';
 import { Task } from '../../task';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { NewTaskFormComponent } from '../new-task-form/new-task-form.component';
 
@@ -46,7 +46,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
       )
       .subscribe(project => {
         this.project = project;
-        this.editForm = this.fb.group({ name: project.name });
+        this.editForm = this.fb.group({
+          name: [project.name, [Validators.maxLength(30)]],
+        });
       });
   }
 
@@ -59,18 +61,25 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    const name = this.editForm.get('name').value;
     if (
-      this.editForm.get('name').value.trim() !== '' &&
-      this.editForm.get('name').value !== this.project.name
-    )
-      this.projectsService.updateProject(this.project.id, this.editForm.value)
-
-    this.toggleEdit();
+      name.trim() === '' ||
+      name === this.project.name
+    ) {
+      this.toggleEdit();
+    } else if (
+      name.trim() !== '' &&
+      name !== this.project.name &&
+      this.editForm.valid
+    ) {
+      this.projectsService.updateProject(this.project.id, this.editForm.value);
+      this.toggleEdit();
+    }
   }
 
   delete() {
     this.projectsService.deleteProject(this.project.id);
-    this.router.navigate(['/projects'])
+    this.router.navigate(['/projects']);
   }
 
   openNewTaskForm() {

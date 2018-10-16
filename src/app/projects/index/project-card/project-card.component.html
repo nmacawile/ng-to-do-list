@@ -20,16 +20,20 @@
     </h2>
 
     <form *ngIf="editMode"
-          fxLayout="row nowrap"
-          fxLayoutAlign="center center"
-          [formGroup]="editForm"
-          (ngSubmit)="save()">
+        fxLayout="row nowrap"
+        fxLayoutAlign="center center"
+        [formGroup]="editForm"
+        (ngSubmit)="save()">
       <mat-form-field fxFlex="100%">
         <input
           [ngStyle]="{ 'fontSize': '18px', 'fontWeight': '500' }"
           matInput
           placeholder="Name"
-          formControlName="name">
+          formControlName="name"
+          maxLength="30"
+          #projectNameInput>
+        <mat-hint align="end">{{projectNameInput.value?.length || 0}}/30</mat-hint>
+        <mat-error>Too long.</mat-error>
       </mat-form-field>
       <button mat-icon-button><mat-icon>save</mat-icon></button>
     </form>

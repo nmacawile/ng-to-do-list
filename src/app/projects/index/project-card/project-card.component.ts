@@ -32,13 +32,20 @@ export class ProjectCardComponent implements OnInit {
   }
 
   save() {
+    const name = this.editForm.get('name').value;
     if (
-      this.editForm.get('name').value.trim() !== '' &&
-      this.editForm.get('name').value !== this.project.name
-    )
-      this.projectsService.updateProject(this.project.id, this.editForm.value)
-
-    this.toggleEdit();
+      name.trim() === '' ||
+      name === this.project.name
+    ) {
+      this.toggleEdit();
+    } else if (
+      name.trim() !== '' &&
+      name !== this.project.name &&
+      this.editForm.valid
+    ) {
+      this.projectsService.updateProject(this.project.id, this.editForm.value);
+      this.toggleEdit();
+    }
   }
 
   delete() {

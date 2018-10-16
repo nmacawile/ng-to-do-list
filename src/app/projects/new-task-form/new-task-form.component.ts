@@ -23,7 +23,7 @@ export class NewTaskFormComponent implements OnInit {
 
   ngOnInit() {
     this.newTaskForm = this.fb.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       description: [null],
       due: [null],
       priority: [
