@@ -6,6 +6,8 @@ import { switchMap, tap } from 'rxjs/operators';
 import { Project } from '../../project';
 import { Task } from '../../task';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { NewTaskFormComponent } from '../new-task-form/new-task-form.component';
 
 @Component({
   selector: 'app-project',
@@ -25,6 +27,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -68,5 +71,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
   delete() {
     this.projectsService.deleteProject(this.project.id);
     this.router.navigate(['/projects'])
+  }
+
+  openNewTaskForm() {
+    this.dialog.open(NewTaskFormComponent, {
+      width: '400px',
+      data: this.project,
+    });
   }
 }

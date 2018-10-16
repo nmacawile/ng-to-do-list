@@ -34,6 +34,14 @@
       </mat-form-field>
       <button mat-icon-button><mat-icon>save</mat-icon></button>
     </form>
+    
+  <button mat-raised-button
+          (click)="openNewTaskForm()"
+          color="primary"
+          style="margin-bottom: 32px;"
+          [ngStyle.xs]="{ 'width': '100%' }">
+    NEW TASK <mat-icon inline="true">add</mat-icon>
+  </button>
   
   <p class="mat-body-1" *ngIf="!project.tasks.length">
     This project has no tasks.
@@ -67,7 +75,7 @@
           <input type="number" matInput placeholder="Priority" value="{{task.priority}}">
         </mat-form-field>
         <mat-form-field fxFlex="50%">
-          <input matInput [matDatepicker]="picker" placeholder="Due">
+          <input matInput [matDatepicker]="picker" placeholder="Due" value="10/01/2001">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

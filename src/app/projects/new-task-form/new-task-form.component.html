@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>New Task</h1>
+<form [formGroup]="newTaskForm" (ngSubmit)="create()">
+  <mat-dialog-content fxLayout="row wrap"
+                      fxLayoutGap="16px grid">
+    <mat-form-field style="width: 100%;">
+      <input matInput formControlName="name" placeholder="Name">
+      <mat-error>This is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field fxFlex="100%">
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                formControlName="description" 
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMaxRows="5">Task Description</textarea>
+      </mat-form-field>
+      <mat-form-field fxFlex="50%" fxFlex.xs="100%">
+        <input type="number" formControlName="priority" matInput placeholder="Priority" min="1" max="10">
+        <mat-error 
+          *ngIf="taskFormFieldError('priority', 'min') || taskFormFieldError('priority', 'max')">Should be between 1 and 10.
+        </mat-error>
+        <mat-error 
+          *ngIf="taskFormFieldError('priority', 'required')">This field is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex="50%" fxFlex.xs="100%">
+        <input matInput [matDatepicker]="picker" formControlName="due" placeholder="Due">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-dialog-content>
+  <div mat-dialog-actions>
+    <div style="margin: auto; overflow: auto;" fxLayout="row nowrap">
+      <button type="button" mat-raised-button (click)="close()">CANCEL</button>
+      <button type="submit" mat-raised-button color="primary">CREATE</button>
+    </div>
+  </div>
+</form>

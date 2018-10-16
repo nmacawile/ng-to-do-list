@@ -11,6 +11,7 @@ import { NewProjectFormComponent } from './new-project-form/new-project-form.com
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProjectCardComponent } from './index/project-card/project-card.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     NewProjectFormComponent,
     ProjectCardComponent,
     LoadingSpinnerComponent,
+    NewTaskFormComponent,
   ],
-  entryComponents: [NewProjectFormComponent],
+  entryComponents: [NewProjectFormComponent, NewTaskFormComponent],
 })
 export class ProjectsModule {}

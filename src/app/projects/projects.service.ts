@@ -10,6 +10,7 @@ import { Project } from '../project';
 import { User } from '../user';
 import { Task } from '../task';
 import { AuthService } from '../core/auth.service';
+import { firestore } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
@@ -97,6 +98,23 @@ export class ProjectsService {
             .collection<Project>('projects')
             .doc(id)
             .delete(),
+        ),
+      )
+      .toPromise();
+  }
+
+  createTask(projectId: string, task: Task) {
+    return this.authService.user
+      .pipe(
+        map((user: User) =>
+          this.afs
+            .collection<User>('users')
+            .doc(user.uid)
+            .collection<Project>('projects')
+            .doc(projectId)
+            .update({
+              tasks: firestore.FieldValue.arrayUnion({ completed: false, ...task}),
+            }),
         ),
       )
       .toPromise();
