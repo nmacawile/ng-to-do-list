@@ -1,7 +1,7 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header class="task-header">
     <mat-panel-title>
-      <mat-checkbox (click)="$event.stopPropagation();" color="accent" [checked]="task.completed">
+      <mat-checkbox (click)="$event.stopPropagation();" color="accent" [(ngModel)]="task.completed" (change)="updateTasks()">
         <div class="task-title">
           {{task.name}}
         </div>

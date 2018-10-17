@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from '../../../task';
+import { Project } from '../../../project';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProjectsService } from '../../projects.service';
 
@@ -13,7 +14,7 @@ export class TaskComponent implements OnInit {
   task: Task;
 
   @Input()
-  projectId: string;
+  project: Project;
 
   taskForm: FormGroup;
 
@@ -29,6 +30,10 @@ export class TaskComponent implements OnInit {
   }
 
   delete() {
-    this.projectsService.deleteTask(this.projectId, this.task);
+    this.projectsService.deleteTask(this.project.id, this.task);
+  }
+
+  updateTasks() {
+    this.projectsService.updateProject(this.project.id, { tasks: this.project.tasks })
   }
 }

@@ -57,7 +57,7 @@
                  [data]="project.tasks"
                  (stop)="updateTasks($event)">
     <ng-container *ngFor="let task of project.tasks">
-      <app-task [task]="task" [projectId]="project.id"></app-task>
+      <app-task [task]="task" [project]="project"></app-task>
     </ng-container>
   </mat-accordion>
 </ng-container>
