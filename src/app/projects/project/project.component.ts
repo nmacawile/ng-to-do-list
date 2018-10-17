@@ -36,7 +36,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
           this.editMode = false;
-        }),        
+        }),
         debounceTime(300),
         switchMap(params => {
           this.loading = true;
@@ -63,10 +63,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   save() {
     const name = this.editForm.get('name').value;
-    if (
-      name.trim() === '' ||
-      name === this.project.name
-    ) {
+    if (name.trim() === '' || name === this.project.name) {
       this.toggleEdit();
     } else if (
       name.trim() !== '' &&
@@ -91,6 +88,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   updateTasks(tasks) {
-    this.projectsService.updateProject(this.project.id, { tasks: tasks});
+    this.projectsService.updateProject(this.project.id, { tasks: tasks });
+  }
+
+  sort() {
+    this.updateTasks(
+      this.project.tasks.sort((a, b) => {
+        return (
+          <any>a.completed - <any>b.completed ||
+          b.priority - a.priority ||
+          <any>a.due - <any>b.due
+        );
+      }),
+    );
   }
 }
