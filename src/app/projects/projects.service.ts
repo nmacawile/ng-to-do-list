@@ -5,7 +5,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, debounceTime } from 'rxjs/operators';
 import { Project } from '../project';
 import { User } from '../user';
 import { Task } from '../task';
@@ -79,6 +79,7 @@ export class ProjectsService {
   updateProject(id: string, data: any) {
     return this.authService.user
       .pipe(
+        debounceTime(200),
         map((user: User) =>
           this.afs
             .collection<User>('users')
