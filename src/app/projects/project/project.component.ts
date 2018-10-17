@@ -88,4 +88,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
       data: this.project,
     });
   }
+
+  updateTasks(tasks) {
+    this.projectsService.updateProject(this.project.id, { tasks: tasks});
+  }
 }

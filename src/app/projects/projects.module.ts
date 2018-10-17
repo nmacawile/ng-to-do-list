@@ -13,6 +13,7 @@ import { ProjectCardComponent } from './index/project-card/project-card.componen
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
 import { TaskComponent } from './project/task/task.component';
+import { SortableDirective } from './sortable.directive';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { TaskComponent } from './project/task/task.component';
     LoadingSpinnerComponent,
     NewTaskFormComponent,
     TaskComponent,
+    SortableDirective,
   ],
   entryComponents: [NewProjectFormComponent, NewTaskFormComponent],
 })

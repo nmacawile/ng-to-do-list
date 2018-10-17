@@ -50,7 +50,12 @@
   <p class="mat-body-1" *ngIf="!project.tasks.length">
     This project has no tasks.
   </p>
-  <mat-accordion *ngIf="project.tasks.length" multi="true" class="task-list">
+  <mat-accordion *ngIf="project.tasks.length"
+                 multi="true"
+                 class="task-list"
+                 sortable
+                 [data]="project.tasks"
+                 (stop)="updateTasks($event)">
     <ng-container *ngFor="let task of project.tasks">
       <app-task [task]="task" [projectId]="project.id"></app-task>
     </ng-container>
