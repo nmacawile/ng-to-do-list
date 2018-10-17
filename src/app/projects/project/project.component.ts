@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProjectsService } from '../projects.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, debounceTime } from 'rxjs/operators';
 import { Project } from '../../project';
 import { Task } from '../../task';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -36,7 +36,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
         tap(() => {
           this.loading = true;
           this.editMode = false;
-        }),
+        }),        
+        debounceTime(300),
         switchMap(params => {
           this.loading = true;
           const id = params.get('id');
