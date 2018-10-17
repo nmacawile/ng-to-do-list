@@ -97,7 +97,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
         return (
           <any>a.completed - <any>b.completed ||
           b.priority - a.priority ||
-          <any>a.due - <any>b.due
+          <any>a.due - <any>b.due ||
+          (a.name < b.name ? -1 : 1)
         );
       }),
     );
