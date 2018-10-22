@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectsComponent } from './projects.component';
+import { MainComponent } from './main/main.component';
 import { ProjectComponent } from './project/project.component';
 import { IndexComponent } from './index/index.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectsComponent,
+    component: MainComponent,
     children: [
       {
         path: '',

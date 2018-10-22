@@ -1,0 +1,9 @@
+<projects-root *ngIf="authService.user"></projects-root>
+<div *ngIf="!authService.user"
+     style="text-align: center; color: #fff; margin-top: 5rem;">
+  <h1 class="mat-display-2">Unauthorized access</h1>
+  <p *ngIf="authService.user" class="mat-body-1">
+    You are not logged in.<br>
+  </p>
+  <a mat-stroked-button routerLink="/">CLICK HERE TO LOG-IN</a>
+</div>

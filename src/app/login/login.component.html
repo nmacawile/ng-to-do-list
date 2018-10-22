@@ -1,1 +1,15 @@
-<button mat-raised-button (click)="authService.googleLogIn()">LOG-IN WITH GOOGLE</button>
+<div style="background-color: #c2185b;" fxLayout>
+  <h1 class="mat-display-2" style="color: #fff; margin: 5rem auto 3rem; padding: 1rem; text-align: center">Angular To-do List</h1>
+</div>
+
+<div *ngIf="!authService.user" fxLayout="column" fxLayoutGap="16px" style="width: 280px; margin: 16px auto;">
+  <button mat-raised-button color="accent" (click)="authService.googleLogIn()">LOG-IN WITH GOOGLE</button>
+  <!-- <button mat-raised-button color="accent" (click)="authService.facebookLogIn()">LOG-IN WITH FACEBOOK</button>
+  <button mat-raised-button color="accent" (click)="authService.githubLogIn()">LOG-IN WITH GITHUB</button> -->
+</div>
+
+<div *ngIf="authService.user" style="width: 280px; margin: 16px auto; text-align: center;">
+  <p class="mat-body-1" style="color: #fff;">Logged in as <span class="mat-body-2">{{authService.user.email}}</span><br>
+    <a mat-raised-button color="accent" routerLink="/projects">CONTINUE TO PROJECTS</a>
+  </p> 
+</div>

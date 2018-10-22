@@ -14,6 +14,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
 import { TaskComponent } from './project/task/task.component';
 import { SortableDirective } from './sortable.directive';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { SortableDirective } from './sortable.directive';
     NewTaskFormComponent,
     TaskComponent,
     SortableDirective,
+    MainComponent,
   ],
   entryComponents: [NewProjectFormComponent, NewTaskFormComponent],
 })

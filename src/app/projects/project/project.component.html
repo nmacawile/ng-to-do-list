@@ -1,5 +1,5 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
-<ng-container *ngIf="!loading">  
+<ng-container *ngIf="!loading && project">  
   <div fxLayout
        style="width:100%"
        fxLayoutAlign="flex-start flex-start"
@@ -64,4 +64,7 @@
       <app-task [task]="task" [project]="project"></app-task>
     </ng-container>
   </mat-accordion>
+</ng-container>
+<ng-container *ngIf="!loading && !project">
+  This project does not exist.
 </ng-container>

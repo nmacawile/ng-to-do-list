@@ -15,14 +15,15 @@ import { User } from '../user';
   providedIn: 'root',
 })
 export class AuthService {
-  user: Observable<User>;
+  user: User;
+  user$: Observable<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
     private afs: AngularFirestore,
   ) {
-    this.user = this.afAuth.authState.pipe(
+    this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
@@ -31,6 +32,8 @@ export class AuthService {
         }
       }),
     );
+
+    this.user$.subscribe(user => (this.user = user));
   }
 
   googleLogIn() {

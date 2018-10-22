@@ -47,9 +47,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
       )
       .subscribe(project => {
         this.project = project;
-        this.editForm = this.fb.group({
-          name: [project.name, [Validators.maxLength(30)]],
-        });
+
+        if (project)
+          this.editForm = this.fb.group({
+            name: [project.name, [Validators.maxLength(30)]],
+          });
+        
       });
   }
 

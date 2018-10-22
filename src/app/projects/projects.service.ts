@@ -5,7 +5,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { switchMap, map, debounceTime } from 'rxjs/operators';
+import { switchMap, map, debounceTime, catchError } from 'rxjs/operators';
 import { Project } from '../project';
 import { User } from '../user';
 import { Task } from '../task';
@@ -16,15 +16,11 @@ import { firestore } from 'firebase/app';
   providedIn: 'root',
 })
 export class ProjectsService {
-  constructor(
-    private afs: AngularFirestore,
-    private authService: AuthService,
-  ) {}
+  constructor(private afs: AngularFirestore, private authService: AuthService) {}
 
   getProjects(): Observable<Project[]> {
-    return this.authService.user.pipe(
+    return this.authService.user$.pipe(
       switchMap((user: User) => {
-        if (user === null) return of([]);
         return this.afs
           .collection<User>('users')
           .doc(user.uid)
@@ -38,11 +34,12 @@ export class ProjectsService {
           return { id, ...data };
         }),
       ),
+      catchError(e => of(null)),
     );
   }
 
   getProject(id: string): Observable<Project> {
-    return this.authService.user.pipe(
+    return this.authService.user$.pipe(
       switchMap((user: User) => {
         return this.afs
           .collection<User>('users')
@@ -59,11 +56,12 @@ export class ProjectsService {
         const id = action.payload.id;
         return { id, ...data };
       }),
+      catchError(e => of(null)),
     );
   }
 
   createProject(name: string) {
-    return this.authService.user
+    return this.authService.user$
       .pipe(
         map((user: User) =>
           this.afs
@@ -77,7 +75,7 @@ export class ProjectsService {
   }
 
   updateProject(id: string, data: any) {
-    return this.authService.user
+    return this.authService.user$
       .pipe(
         debounceTime(200),
         map((user: User) =>
@@ -93,7 +91,7 @@ export class ProjectsService {
   }
 
   deleteProject(id: string) {
-    return this.authService.user
+    return this.authService.user$
       .pipe(
         map((user: User) =>
           this.afs
@@ -108,7 +106,7 @@ export class ProjectsService {
   }
 
   createTask(projectId: string, task: Task) {
-    return this.authService.user
+    return this.authService.user$
       .pipe(
         map((user: User) =>
           this.afs
@@ -128,7 +126,7 @@ export class ProjectsService {
   }
 
   deleteTask(projectId: string, task: Task) {
-    return this.authService.user
+    return this.authService.user$
       .pipe(
         map((user: User) =>
           this.afs
