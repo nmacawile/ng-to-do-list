@@ -4,8 +4,8 @@
 
 <div *ngIf="!authService.user" fxLayout="column" fxLayoutGap="16px" style="width: 280px; margin: 16px auto;">
   <button mat-raised-button color="accent" (click)="authService.googleLogIn()">LOG-IN WITH GOOGLE</button>
-  <!-- <button mat-raised-button color="accent" (click)="authService.facebookLogIn()">LOG-IN WITH FACEBOOK</button>
-  <button mat-raised-button color="accent" (click)="authService.githubLogIn()">LOG-IN WITH GITHUB</button> -->
+  <button mat-raised-button color="accent" (click)="authService.facebookLogIn()">LOG-IN WITH FACEBOOK</button>
+  <!-- <button mat-raised-button color="accent" (click)="authService.githubLogIn()">LOG-IN WITH GITHUB</button> -->
 </div>
 
 <div *ngIf="authService.user" style="width: 280px; margin: 16px auto; text-align: center;">

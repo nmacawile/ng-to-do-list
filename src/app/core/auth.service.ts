@@ -42,6 +42,12 @@ export class AuthService {
     );
   }
 
+  facebookLogIn() {
+    this.oAuthLogIn(new auth.FacebookAuthProvider()).then(() =>
+      this.router.navigate(['/projects']),
+    );
+  }
+
   private oAuthLogIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
       this.createOrUpdateUser(credential.user);
