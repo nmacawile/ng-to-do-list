@@ -14,7 +14,7 @@ export class DeleteProjectConfirmationComponent implements OnInit {
     private projectsService: ProjectsService,
     private router: Router,
     public dialogRef: MatDialogRef<DeleteProjectConfirmationComponent>,
-    @Inject(MAT_DIALOG_DATA) private project: Project,
+    @Inject(MAT_DIALOG_DATA) public project: Project,
   ) {}
 
   ngOnInit() {}
