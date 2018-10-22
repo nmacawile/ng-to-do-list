@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '../../../project';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectsService } from '../../projects.service';
+import { MatDialog } from '@angular/material';
+import { DeleteProjectConfirmationComponent } from '../../delete-project-confirmation/delete-project-confirmation.component';
 
 @Component({
   selector: 'app-project-card',
@@ -19,6 +21,7 @@ export class ProjectCardComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectsService: ProjectsService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -49,6 +52,9 @@ export class ProjectCardComponent implements OnInit {
   }
 
   delete() {
-    this.projectsService.deleteProject(this.project.id);
+    this.dialog.open(DeleteProjectConfirmationComponent, {
+      width: '400px',
+      data: this.project,
+    });
   }
 }

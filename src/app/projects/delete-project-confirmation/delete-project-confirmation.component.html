@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Confirm project delete</h1>
+<mat-dialog-content>
+  <p class="mat-body-1">Are you sure you want to delete <span class="mat-body-2">{{project.name}}</span>?</p>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <div style="margin: auto; overflow: auto;" fxLayout="row nowrap">
+    <button mat-raised-button (click)="close()">CANCEL</button>
+    <button mat-raised-button (click)="delete()"color="warn">DELETE</button>
+  </div>
+</div>

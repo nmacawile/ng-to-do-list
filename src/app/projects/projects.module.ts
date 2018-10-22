@@ -15,6 +15,7 @@ import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
 import { TaskComponent } from './project/task/task.component';
 import { SortableDirective } from './sortable.directive';
 import { MainComponent } from './main/main.component';
+import { DeleteProjectConfirmationComponent } from './delete-project-confirmation/delete-project-confirmation.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { MainComponent } from './main/main.component';
     TaskComponent,
     SortableDirective,
     MainComponent,
+    DeleteProjectConfirmationComponent,
   ],
-  entryComponents: [NewProjectFormComponent, NewTaskFormComponent],
+  entryComponents: [NewProjectFormComponent, NewTaskFormComponent, DeleteProjectConfirmationComponent],
 })
 export class ProjectsModule {}

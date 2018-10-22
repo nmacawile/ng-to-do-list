@@ -8,6 +8,9 @@ import { Task } from '../../task';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { NewTaskFormComponent } from '../new-task-form/new-task-form.component';
+import { 
+  DeleteProjectConfirmationComponent
+} from '../delete-project-confirmation/delete-project-confirmation.component';
 
 @Component({
   selector: 'app-project',
@@ -52,7 +55,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
           this.editForm = this.fb.group({
             name: [project.name, [Validators.maxLength(30)]],
           });
-        
       });
   }
 
@@ -79,8 +81,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    this.projectsService.deleteProject(this.project.id);
-    this.router.navigate(['/projects']);
+    this.dialog.open(DeleteProjectConfirmationComponent, {
+      width: '400px',
+      data: this.project,
+    });
   }
 
   openNewTaskForm() {
